@@ -1,4 +1,10 @@
 {
+  "name": "homeland-booking",
+  "version": "1.0.0",
+  "main": "index.ts",
+  "scripts": {
+    "start": "node index.js"
+  },
   "devDependencies": {
     "ts-node": "^10.9.2"
   },
