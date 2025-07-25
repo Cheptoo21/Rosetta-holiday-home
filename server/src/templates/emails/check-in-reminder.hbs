@@ -1,0 +1,116 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Check-in Reminder</title>
+    <style>
+      body { font-family: Arial, sans-serif; line-height: 1.6; color: #333;
+      max-width: 600px; margin: 0 auto; padding: 0; background-color: #f4f4f4; }
+      .container { background-color: white; margin: 20px; border-radius: 10px;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.1); overflow: hidden; } .header {
+      background: linear-gradient(135deg, #f59e0b, #d97706); color: white;
+      padding: 30px; text-align: center; } .header h1 { margin: 0; font-size:
+      28px; font-weight: 700; } .header p { margin: 10px 0 0 0; font-size: 16px;
+      opacity: 0.9; } .content { padding: 30px; } .reminder-info {
+      background-color: #fef3c7; border-left: 4px solid #f59e0b; padding: 20px;
+      margin: 20px 0; border-radius: 8px; } .reminder-info h3 { margin: 0 0 15px
+      0; color: #92400e; } .detail-row { display: flex; justify-content:
+      space-between; margin: 10px 0; padding: 8px 0; border-bottom: 1px solid
+      #e5e7eb; } .detail-row:last-child { border-bottom: none; } .detail-label {
+      font-weight: 600; color: #374151; } .detail-value { color: #111827; }
+      .host-contact { background-color: #f0f9ff; border-radius: 8px; padding:
+      20px; margin: 20px 0; } .host-contact h3 { margin: 0 0 15px 0; color:
+      #1e40af; } .contact-item { margin: 8px 0; display: flex; align-items:
+      center; } .contact-item strong { margin-right: 10px; min-width: 60px; }
+      .important-info { background-color: #dbeafe; border-left: 4px solid
+      #2563eb; padding: 15px; margin: 20px 0; border-radius: 8px; }
+      .important-info h4 { margin: 0 0 10px 0; color: #1e40af; } .button {
+      display: inline-block; background-color: #f59e0b; color: white; padding:
+      12px 30px; text-decoration: none; border-radius: 6px; font-weight: 600;
+      margin: 20px 0; } .footer { background-color: #f9fafb; padding: 20px;
+      text-align: center; border-top: 1px solid #e5e7eb; color: #6b7280;
+      font-size: 14px; } .footer a { color: #2563eb; text-decoration: none; }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="header">
+        <h1>🏠 Check-in Reminder</h1>
+        <p>Your stay at {{propertyTitle}} is tomorrow!</p>
+      </div>
+
+      <div class="content">
+        <p>Dear {{guestName}},</p>
+
+        <p>We're excited to remind you that your check-in is tomorrow! Here are
+          the details for your upcoming stay:</p>
+
+        <div class="reminder-info">
+          <h3>📅 Check-in Information</h3>
+
+          <div class="detail-row">
+            <span class="detail-label">🏠 Property:</span>
+            <span class="detail-value">{{propertyTitle}}</span>
+          </div>
+
+          <div class="detail-row">
+            <span class="detail-label">📅 Check-in Date:</span>
+            <span class="detail-value">{{checkIn}}</span>
+          </div>
+
+          <div class="detail-row">
+            <span class="detail-label">📍 Address:</span>
+            <span class="detail-value">{{propertyAddress}}</span>
+          </div>
+        </div>
+
+        <div class="host-contact">
+          <h3>📞 Contact Your Host</h3>
+          <p>Please contact your host to confirm your arrival time and get
+            check-in instructions:</p>
+
+          <div class="contact-item">
+            <strong>Host:</strong>
+            {{hostName}}
+          </div>
+
+          <div class="contact-item">
+            <strong>Phone:</strong>
+            {{hostPhone}}
+          </div>
+        </div>
+
+        <div class="important-info">
+          <h4>📋 Before You Arrive</h4>
+          <ul>
+            <li>Contact your host to confirm arrival time</li>
+            <li>Get specific check-in instructions</li>
+            <li>Ask about parking and access information</li>
+            <li>Confirm any special arrangements</li>
+          </ul>
+        </div>
+
+        <div style="text-align: center; margin: 30px 0;">
+          <a href="tel:{{hostPhone}}" class="button">📞 Call Host Now</a>
+        </div>
+
+        <p>We hope you have a wonderful stay! If you have any questions or need
+          assistance, please don't hesitate to contact us.</p>
+
+        <p>Safe travels,<br />
+          <strong>The {{platformName}} Team</strong></p>
+      </div>
+
+      <div class="footer">
+        <p>© {{currentYear}} {{platformName}}. All rights reserved.</p>
+        <p>
+          <a href="#">Contact Support</a>
+          |
+          <a href="#">Terms of Service</a>
+          |
+          <a href="#">Privacy Policy</a>
+        </p>
+      </div>
+    </div>
+  </body>
+</html>

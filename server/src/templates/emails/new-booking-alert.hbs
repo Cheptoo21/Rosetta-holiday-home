@@ -1,0 +1,151 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>New Booking Alert</title>
+    <style>
+      body { font-family: Arial, sans-serif; line-height: 1.6; color: #333;
+      max-width: 600px; margin: 0 auto; padding: 0; background-color: #f4f4f4; }
+      .container { background-color: white; margin: 20px; border-radius: 10px;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.1); overflow: hidden; } .header {
+      background: linear-gradient(135deg, #059669, #047857); color: white;
+      padding: 30px; text-align: center; } .header h1 { margin: 0; font-size:
+      28px; font-weight: 700; } .header p { margin: 10px 0 0 0; font-size: 16px;
+      opacity: 0.9; } .content { padding: 30px; } .booking-details {
+      background-color: #f0fdf4; border-left: 4px solid #059669; padding: 20px;
+      margin: 20px 0; border-radius: 8px; } .detail-row { display: flex;
+      justify-content: space-between; margin: 10px 0; padding: 8px 0;
+      border-bottom: 1px solid #e5e7eb; } .detail-row:last-child {
+      border-bottom: none; font-weight: bold; font-size: 18px; color: #059669; }
+      .detail-label { font-weight: 600; color: #374151; } .detail-value { color:
+      #111827; } .guest-info { background-color: #fef3c7; border-radius: 8px;
+      padding: 20px; margin: 20px 0; } .guest-info h3 { margin: 0 0 15px 0;
+      color: #92400e; } .contact-item { margin: 8px 0; display: flex;
+      align-items: center; } .contact-item strong { margin-right: 10px;
+      min-width: 70px; } .action-buttons { text-align: center; margin: 30px 0; }
+      .button { display: inline-block; color: white; padding: 12px 30px;
+      text-decoration: none; border-radius: 6px; font-weight: 600; margin: 0
+      10px; } .button-primary { background-color: #059669; } .button-secondary {
+      background-color: #2563eb; } .important-info { background-color: #dbeafe;
+      border-left: 4px solid #2563eb; padding: 15px; margin: 20px 0;
+      border-radius: 8px; } .important-info h4 { margin: 0 0 10px 0; color:
+      #1e40af; } .footer { background-color: #f9fafb; padding: 20px; text-align:
+      center; border-top: 1px solid #e5e7eb; color: #6b7280; font-size: 14px; }
+      .footer a { color: #2563eb; text-decoration: none; } .earnings-highlight {
+      background-color: #f0fdf4; border: 2px solid #059669; border-radius: 8px;
+      padding: 15px; text-align: center; margin: 20px 0; } .earnings-highlight
+      h4 { margin: 0 0 10px 0; color: #059669; } .earnings-amount { font-size:
+      24px; font-weight: bold; color: #059669; }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="header">
+        <h1>🔔 New Booking Alert!</h1>
+        <p>You have a new guest booking at {{propertyTitle}}</p>
+      </div>
+
+      <div class="content">
+        <p>Dear {{hostName}},</p>
+
+        <p>Congratulations! You have received a new booking for your property.
+          Here are the details:</p>
+
+        <div class="booking-details">
+          <h3 style="margin-top: 0; color: #059669;">📋 Booking Details</h3>
+
+          <div class="detail-row">
+            <span class="detail-label">🏠 Property:</span>
+            <span class="detail-value">{{propertyTitle}}</span>
+          </div>
+
+          <div class="detail-row">
+            <span class="detail-label">📅 Check-in:</span>
+            <span class="detail-value">{{checkIn}}</span>
+          </div>
+
+          <div class="detail-row">
+            <span class="detail-label">📅 Check-out:</span>
+            <span class="detail-value">{{checkOut}}</span>
+          </div>
+
+          <div class="detail-row">
+            <span class="detail-label">🆔 Booking ID:</span>
+            <span class="detail-value">{{bookingId}}</span>
+          </div>
+
+          <div class="detail-row">
+            <span class="detail-label">💰 Total Earnings:</span>
+            <span class="detail-value">${{totalPrice}}</span>
+          </div>
+        </div>
+
+        <div class="earnings-highlight">
+          <h4>💰 You're Earning</h4>
+          <div class="earnings-amount">${{totalPrice}}</div>
+          <p style="margin: 5px 0 0 0; color: #059669;">This booking will be
+            added to your monthly earnings</p>
+        </div>
+
+        <div class="guest-info">
+          <h3>👤 Guest Information</h3>
+          <p>Your guest has been automatically notified and provided with your
+            contact details:</p>
+
+          <div class="contact-item">
+            <strong>Name:</strong>
+            {{guestName}}
+          </div>
+
+          <div class="contact-item">
+            <strong>Phone:</strong>
+            {{guestPhone}}
+          </div>
+
+          <div class="contact-item">
+            <strong>Email:</strong>
+            {{guestEmail}}
+          </div>
+        </div>
+
+        <div class="important-info">
+          <h4>📞 Next Steps</h4>
+          <ul>
+            <li><strong>Contact your guest</strong>
+              within 24 hours to confirm arrival details</li>
+            <li><strong>Prepare your property</strong>
+              for the guest's arrival</li>
+            <li><strong>Share check-in instructions</strong>
+              and any special information</li>
+            <li><strong>Be available</strong>
+              for any questions or assistance</li>
+          </ul>
+        </div>
+
+        <div class="action-buttons">
+          <a href="mailto:{{guestEmail}}" class="button button-primary">✉️ Email
+            Guest</a>
+          <a href="tel:{{guestPhone}}" class="button button-secondary">📞 Call
+            Guest</a>
+        </div>
+
+        <p>This booking is confirmed and the guest has been notified. They're
+          looking forward to staying at your property!</p>
+
+        <p>Keep up the great work,<br />
+          <strong>The {{platformName}} Team</strong></p>
+      </div>
+
+      <div class="footer">
+        <p>© {{currentYear}} {{platformName}}. All rights reserved.</p>
+        <p>
+          <a href="#">Host Dashboard</a>
+          |
+          <a href="#">Support</a>
+          |
+          <a href="#">Host Resources</a>
+        </p>
+      </div>
+    </div>
+  </body>
+</html>

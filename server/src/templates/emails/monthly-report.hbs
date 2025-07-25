@@ -1,0 +1,146 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Monthly Report</title>
+    <style>
+      body { font-family: Arial, sans-serif; line-height: 1.6; color: #333;
+      max-width: 600px; margin: 0 auto; padding: 0; background-color: #f4f4f4; }
+      .container { background-color: white; margin: 20px; border-radius: 10px;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.1); overflow: hidden; } .header {
+      background: linear-gradient(135deg, #059669, #047857); color: white;
+      padding: 30px; text-align: center; } .header h1 { margin: 0; font-size:
+      28px; font-weight: 700; } .header p { margin: 10px 0 0 0; font-size: 16px;
+      opacity: 0.9; } .content { padding: 30px; } .stats-grid { display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 20px;
+      margin: 30px 0; } .stat-card { background-color: #f0fdf4; padding: 20px;
+      border-radius: 8px; text-align: center; border: 1px solid #bbf7d0; }
+      .stat-number { font-size: 2rem; font-weight: bold; color: #059669;
+      margin-bottom: 5px; } .stat-label { font-size: 0.9rem; color: #374151; }
+      .highlight-card { background-color: #f0fdf4; border: 2px solid #059669;
+      border-radius: 8px; padding: 20px; text-align: center; margin: 20px 0; }
+      .highlight-card h3 { margin: 0 0 10px 0; color: #059669; }
+      .highlight-amount { font-size: 2.5rem; font-weight: bold; color: #059669;
+      margin: 10px 0; } .performance-info { background-color: #dbeafe;
+      border-left: 4px solid #2563eb; padding: 20px; margin: 20px 0;
+      border-radius: 8px; } .performance-info h3 { margin: 0 0 15px 0; color:
+      #1e40af; } .tips-section { background-color: #fef3c7; border-left: 4px
+      solid #f59e0b; padding: 20px; margin: 20px 0; border-radius: 8px; }
+      .tips-section h3 { margin: 0 0 15px 0; color: #92400e; } .tips-section ul
+      { margin: 0; padding-left: 20px; } .tips-section li { margin: 8px 0;
+      color: #374151; } .button { display: inline-block; background-color:
+      #059669; color: white; padding: 12px 30px; text-decoration: none;
+      border-radius: 6px; font-weight: 600; margin: 20px 0; } .footer {
+      background-color: #f9fafb; padding: 20px; text-align: center; border-top:
+      1px solid #e5e7eb; color: #6b7280; font-size: 14px; } .footer a { color:
+      #2563eb; text-decoration: none; }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="header">
+        <h1>📊 Monthly Report</h1>
+        <p>{{month}} {{year}} Performance Summary</p>
+      </div>
+
+      <div class="content">
+        <p>Dear {{hostName}},</p>
+
+        <p>Here's your monthly performance summary for
+          {{month}}
+          {{year}}. Great job on your hosting journey!</p>
+
+        <div class="highlight-card">
+          <h3>💰 Total Earnings</h3>
+          <div class="highlight-amount">${{totalRevenue}}</div>
+          <p style="margin: 5px 0 0 0; color: #059669;">Your earnings this month</p>
+        </div>
+
+        <div class="stats-grid">
+          <div class="stat-card">
+            <div class="stat-number">{{totalBookings}}</div>
+            <div class="stat-label">Total Bookings</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-number">{{activeProperties}}</div>
+            <div class="stat-label">Active Properties</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-number">${{avgBookingValue}}</div>
+            <div class="stat-label">Avg Booking Value</div>
+          </div>
+        </div>
+
+        <div class="performance-info">
+          <h3>📈 Performance Insights</h3>
+          {{#if (gt totalBookings 0)}}
+            <p>Congratulations! You had
+              {{totalBookings}}
+              successful booking{{#if (gt totalBookings 1)}}s{{/if}}
+              this month, generating ${{totalRevenue}}
+              in revenue.</p>
+
+            {{#if (gt totalBookings 5)}}
+              <p>🌟
+                <strong>Great Performance!</strong>
+                You're in the top tier of hosts with
+                {{totalBookings}}
+                bookings this month.</p>
+            {{else if (gt totalBookings 2)}}
+              <p>👍
+                <strong>Good Progress!</strong>
+                You're building momentum with
+                {{totalBookings}}
+                bookings this month.</p>
+            {{else}}
+              <p>🚀
+                <strong>Getting Started!</strong>
+                You're on the right track with
+                {{totalBookings}}
+                booking{{#if (gt totalBookings 1)}}s{{/if}}
+                this month.</p>
+            {{/if}}
+
+          {{else}}
+            <p>This month you focused on getting your properties set up. Once
+              you start receiving bookings, you'll see detailed performance
+              metrics here.</p>
+          {{/if}}
+        </div>
+
+        <div class="tips-section">
+          <h3>💡 Tips to Increase Your Earnings</h3>
+          <ul>
+            <li>Update your property photos with high-quality images</li>
+            <li>Respond to guest inquiries within 2 hours</li>
+            <li>Keep your calendar updated and available</li>
+            <li>Add detailed property descriptions and amenities</li>
+            <li>Maintain a 5-star rating by providing excellent service</li>
+          </ul>
+        </div>
+
+        <div style="text-align: center; margin: 30px 0;">
+          <a href="#" class="button">📊 View Full Dashboard</a>
+        </div>
+
+        <p>Thank you for being a valued host on
+          {{platformName}}! Your dedication to providing great experiences for
+          guests makes our platform successful.</p>
+
+        <p>Keep up the excellent work!<br />
+          <strong>The {{platformName}} Team</strong></p>
+      </div>
+
+      <div class="footer">
+        <p>© {{currentYear}} {{platformName}}. All rights reserved.</p>
+        <p>
+          <a href="#">Host Dashboard</a>
+          |
+          <a href="#">Support</a>
+          |
+          <a href="#">Host Resources</a>
+        </p>
+      </div>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,259 @@
+// server/prisma/schema.prisma
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id        String   @id @default(cuid())
+  email     String   @unique
+  firstName String
+  lastName  String
+  password  String
+  phone     String?
+  avatar    String?
+  role      UserRole @default(USER)
+  isHost    Boolean  @default(false)
+  
+  // Password reset fields
+  resetToken       String?
+  resetTokenExpiry DateTime?
+  
+  // Review-related fields
+  overallRating    Float?   @default(0)
+  totalReviews     Int      @default(0)
+  
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  // Relationships
+  properties     Property[]
+  bookings       Booking[]
+  reviewsWritten Review[]   @relation("ReviewAuthor")
+  reviewsReceived Review[]  @relation("ReviewRecipient")
+  reviewResponses ReviewResponse[]
+  reviewHelpfulness ReviewHelpfulness[]
+
+  @@map("users")
+}
+
+model Category {
+  id          String @id @default(cuid())
+  name        String @unique
+  description String
+  icon        String
+  isActive    Boolean @default(true)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime? @updatedAt
+
+  // Relationships
+  properties Property[]
+
+  @@map("categories")
+}
+
+model Property {
+  id             String   @id @default(cuid())
+  title          String
+  description    String
+  address        String
+  city           String
+  country        String
+  pricePerNight  Float
+  maxGuests      Int
+  bedrooms       Int
+  bathrooms      Int
+  amenities      String[] // Array of amenity strings
+  images         String[] // Array of image URLs
+  distanceFromTown String?
+  accessTime     String?
+  otherUnits     String?
+  pinLocation    String?
+  hostContact    String?
+  
+  // Property management
+  isActive       Boolean  @default(true)
+  approvalStatus ApprovalStatus @default(APPROVED)
+  
+  // Review-related fields
+  averageRating     Float?   @default(0)
+  totalReviews      Int      @default(0)
+  cleanlinessRating Float?   @default(0)
+  accuracyRating    Float?   @default(0)
+  communicationRating Float? @default(0)
+  locationRating    Float?   @default(0)
+  checkinRating     Float?   @default(0)
+  valueRating       Float?   @default(0)
+  
+  // Timestamps
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+
+  // Foreign keys
+  hostId         String
+  categoryId     String
+
+  // Relationships
+  host           User      @relation(fields: [hostId], references: [id], onDelete: Cascade)
+  category       Category  @relation(fields: [categoryId], references: [id])
+  bookings       Booking[]
+  reviews        Review[]
+
+  @@map("properties")
+}
+
+model Booking {
+  id          String   @id @default(cuid())
+  checkIn     DateTime
+  checkOut    DateTime
+  guests      Int?
+  totalPrice  Float
+  
+  // Guest information (for anonymous bookings)
+  guestName   String?
+  guestEmail  String
+  guestPhone  String
+  
+  // Special requests
+  specialRequests String?
+  
+  // Booking status
+  status      BookingStatus @default(PENDING)
+  
+  // Review eligibility
+  canReview   Boolean @default(false)
+  hasReviewed Boolean @default(false)
+  
+  // Timestamps
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  // Foreign keys
+  propertyId  String
+  guestId     String?
+
+  // Relationships
+  property    Property @relation(fields: [propertyId], references: [id], onDelete: Cascade)
+  guest       User?    @relation(fields: [guestId], references: [id])
+  review      Review?
+
+  @@map("bookings")
+}
+
+model Review {
+  id          String   @id @default(cuid())
+  
+  // Overall rating (1-5 stars)
+  overallRating Int
+  
+  // Category ratings (1-5 stars each)
+  cleanlinessRating    Int?
+  accuracyRating       Int?
+  communicationRating  Int?
+  locationRating       Int?
+  checkinRating        Int?
+  valueRating          Int?
+  
+  // Review content
+  comment         String?
+  images          String[] // Array of review image URLs
+  
+  // Review metadata
+  stayDuration    Int?     // Number of nights
+  travelType      String?  // Business, Leisure, Family, etc.
+  guestCount      Int?     // Number of guests during stay
+  
+  // Moderation
+  isPublished     Boolean  @default(false)
+  isApproved      Boolean  @default(false)
+  moderationNotes String?
+  
+  // Helpfulness
+  helpfulCount    Int      @default(0)
+  notHelpfulCount Int      @default(0)
+  
+  // Timestamps
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+
+  // Foreign keys
+  propertyId      String
+  bookingId       String   @unique
+  authorId        String   // Guest who wrote the review
+  recipientId     String   // Host who received the review
+
+  // Relationships
+  property        Property @relation(fields: [propertyId], references: [id], onDelete: Cascade)
+  booking         Booking  @relation(fields: [bookingId], references: [id], onDelete: Cascade)
+  author          User     @relation("ReviewAuthor", fields: [authorId], references: [id])
+  recipient       User     @relation("ReviewRecipient", fields: [recipientId], references: [id])
+  response        ReviewResponse?
+  helpfulness     ReviewHelpfulness[]
+
+  @@map("reviews")
+}
+
+model ReviewResponse {
+  id        String   @id @default(cuid())
+  message   String
+  
+  // Timestamps
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  // Foreign keys
+  reviewId  String   @unique
+  hostId    String
+
+  // Relationships
+  review    Review   @relation(fields: [reviewId], references: [id], onDelete: Cascade)
+  host      User     @relation(fields: [hostId], references: [id])
+
+  @@map("review_responses")
+}
+
+model ReviewHelpfulness {
+  id         String   @id @default(cuid())
+  isHelpful  Boolean  // true for helpful, false for not helpful
+  
+  // Timestamps
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+
+  // Foreign keys
+  reviewId   String
+  userId     String
+
+  // Relationships
+  review     Review   @relation(fields: [reviewId], references: [id], onDelete: Cascade)
+  user       User     @relation(fields: [userId], references: [id])
+
+  // Ensure one vote per user per review
+  @@unique([reviewId, userId])
+  @@map("review_helpfulness")
+}
+
+enum UserRole {
+  USER
+  ADMIN
+  SUPER_ADMIN
+}
+
+enum ApprovalStatus {
+  PENDING
+  APPROVED
+  REJECTED
+}
+
+enum BookingStatus {
+  PENDING
+  CONFIRMED
+  CHECKED_IN
+  CHECKED_OUT
+  CANCELLED
+  COMPLETED
+}
