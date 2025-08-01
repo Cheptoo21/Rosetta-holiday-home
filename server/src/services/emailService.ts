@@ -106,12 +106,16 @@ class EmailService {
       context: {
         firstName,
         email,
-        clientUrl: process.env.CLIENT_URL || "http://localhost:3000",
+        clientUrl:
+          process.env.CLIENT_URL ||
+          "${process.env.REACT_APP_API_URL || 'http://localhost:3000'}",
         dashboardUrl: `${
-          process.env.CLIENT_URL || "http://localhost:3000"
+          process.env.CLIENT_URL ||
+          "${process.env.REACT_APP_API_URL || 'http://localhost:3000'}"
         }/host-dashboard`,
         supportUrl: `${
-          process.env.CLIENT_URL || "http://localhost:3000"
+          process.env.CLIENT_URL ||
+          "${process.env.REACT_APP_API_URL || 'http://localhost:3000'}"
         }/support`,
       },
     });
@@ -139,9 +143,12 @@ class EmailService {
         guestName,
         email,
         booking: bookingDetails,
-        clientUrl: process.env.CLIENT_URL || "http://localhost:3000",
+        clientUrl:
+          process.env.CLIENT_URL ||
+          "${process.env.REACT_APP_API_URL || 'http://localhost:3000'}",
         supportUrl: `${
-          process.env.CLIENT_URL || "http://localhost:3000"
+          process.env.CLIENT_URL ||
+          "${process.env.REACT_APP_API_URL || 'http://localhost:3000'}"
         }/support`,
       },
     });
@@ -169,9 +176,12 @@ class EmailService {
         hostName,
         email,
         booking: bookingDetails,
-        clientUrl: process.env.CLIENT_URL || "http://localhost:3000",
+        clientUrl:
+          process.env.CLIENT_URL ||
+          "${process.env.REACT_APP_API_URL || 'http://localhost:3000'}",
         dashboardUrl: `${
-          process.env.CLIENT_URL || "http://localhost:3000"
+          process.env.CLIENT_URL ||
+          "${process.env.REACT_APP_API_URL || 'http://localhost:3000'}"
         }/host-dashboard`,
       },
     });
@@ -199,9 +209,12 @@ class EmailService {
         hostName,
         email,
         property: propertyDetails,
-        clientUrl: process.env.CLIENT_URL || "http://localhost:3000",
+        clientUrl:
+          process.env.CLIENT_URL ||
+          "${process.env.REACT_APP_API_URL || 'http://localhost:3000'}",
         dashboardUrl: `${
-          process.env.CLIENT_URL || "http://localhost:3000"
+          process.env.CLIENT_URL ||
+          "${process.env.REACT_APP_API_URL || 'http://localhost:3000'}"
         }/host-dashboard`,
       },
     });
@@ -214,7 +227,8 @@ class EmailService {
     resetToken: string
   ): Promise<void> {
     const resetUrl = `${
-      process.env.CLIENT_URL || "http://localhost:3000"
+      process.env.CLIENT_URL ||
+      "${process.env.REACT_APP_API_URL || 'http://localhost:3000'}"
     }/reset-password?token=${resetToken}`;
 
     await this.sendEmail({
@@ -226,9 +240,12 @@ class EmailService {
         email,
         resetUrl,
         resetToken,
-        clientUrl: process.env.CLIENT_URL || "http://localhost:3000",
+        clientUrl:
+          process.env.CLIENT_URL ||
+          "${process.env.REACT_APP_API_URL || 'http://localhost:3000'}",
         supportUrl: `${
-          process.env.CLIENT_URL || "http://localhost:3000"
+          process.env.CLIENT_URL ||
+          "${process.env.REACT_APP_API_URL || 'http://localhost:3000'}"
         }/support`,
       },
     });
@@ -246,10 +263,16 @@ class EmailService {
       context: {
         firstName,
         email,
-        loginUrl: `${process.env.CLIENT_URL || "http://localhost:3000"}/login`,
-        clientUrl: process.env.CLIENT_URL || "http://localhost:3000",
+        loginUrl: `${
+          process.env.CLIENT_URL ||
+          "${process.env.REACT_APP_API_URL || 'http://localhost:3000'}"
+        }/login`,
+        clientUrl:
+          process.env.CLIENT_URL ||
+          "${process.env.REACT_APP_API_URL || 'http://localhost:3000'}",
         supportUrl: `${
-          process.env.CLIENT_URL || "http://localhost:3000"
+          process.env.CLIENT_URL ||
+          "${process.env.REACT_APP_API_URL || 'http://localhost:3000'}"
         }/support`,
       },
     });
@@ -268,9 +291,12 @@ class EmailService {
         firstName,
         email,
         changeDate: new Date().toLocaleDateString(),
-        clientUrl: process.env.CLIENT_URL || "http://localhost:3000",
+        clientUrl:
+          process.env.CLIENT_URL ||
+          "${process.env.REACT_APP_API_URL || 'http://localhost:3000'}",
         supportUrl: `${
-          process.env.CLIENT_URL || "http://localhost:3000"
+          process.env.CLIENT_URL ||
+          "${process.env.REACT_APP_API_URL || 'http://localhost:3000'}"
         }/support`,
       },
     });
@@ -295,9 +321,12 @@ class EmailService {
         guestName,
         email,
         booking: bookingDetails,
-        clientUrl: process.env.CLIENT_URL || "http://localhost:3000",
+        clientUrl:
+          process.env.CLIENT_URL ||
+          "${process.env.REACT_APP_API_URL || 'http://localhost:3000'}",
         supportUrl: `${
-          process.env.CLIENT_URL || "http://localhost:3000"
+          process.env.CLIENT_URL ||
+          "${process.env.REACT_APP_API_URL || 'http://localhost:3000'}"
         }/support`,
       },
     });
@@ -325,9 +354,12 @@ class EmailService {
         hostName,
         email,
         report: reportData,
-        clientUrl: process.env.CLIENT_URL || "http://localhost:3000",
+        clientUrl:
+          process.env.CLIENT_URL ||
+          "${process.env.REACT_APP_API_URL || 'http://localhost:3000'}",
         dashboardUrl: `${
-          process.env.CLIENT_URL || "http://localhost:3000"
+          process.env.CLIENT_URL ||
+          "${process.env.REACT_APP_API_URL || 'http://localhost:3000'}"
         }/host-dashboard`,
       },
     });
