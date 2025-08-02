@@ -21,7 +21,7 @@ const app = express();
 const PORT = process.env.PORT || 5000;
 
 // Middleware
-app.use(
+/*app.use(
   cors({
     origin: [
       "${process.env.REACT_APP_API_URL || 'http://localhost:3000'}", // for local development
@@ -29,6 +29,17 @@ app.use(
       "https://rosetta-holiday-home-client.vercel.app", // staging frontend
     ],
     credentials: true,
+  })
+);*/
+app.use(
+  cors({
+    origin: [
+      "http://localhost:3000", // For local development
+      "https://rosetta-holiday-home.vercel.app", // Production
+    ],
+    credentials: true,
+    methods: ["GET", "POST", "PUT", "DELETE"],
+    allowedHeaders: ["Content-Type", "Authorization"],
   })
 );
 app.use(express.json());

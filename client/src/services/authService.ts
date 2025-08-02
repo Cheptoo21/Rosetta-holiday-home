@@ -46,7 +46,7 @@ class AuthService {
   login = async (credentials: LoginCredentials): Promise<AuthResponse> => {
     try {
       const response = await api.post("/auth/login", credentials);
-
+      //const { user, token } = response.data.data;
       // Store token and user data
       localStorage.setItem(this.tokenKey, response.data.data.token);
       localStorage.setItem(

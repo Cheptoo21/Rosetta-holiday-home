@@ -10,12 +10,12 @@
 }
 
 .App-link {
-  color: #61dafb;
+  color: #ca8312;
 }
 
 /* Additional styles for our components */
 .hero-section {
-  background: linear-gradient(to right, #2563eb, #1d4ed8);
+  background: linear-gradient(to right, #946102, #c6790e);
   color: white;
   padding: 6rem 1rem;
   text-align: center;
@@ -57,7 +57,7 @@
 }
 
 .search-button {
-  background-color: #2563eb;
+  background-color: #e0bc19;
   color: white;
   padding: 0.75rem 3rem;
   border: none;
@@ -69,7 +69,7 @@
 }
 
 .search-button:hover {
-  background-color: #1d4ed8;
+  background-color: #f0cc16;
 }
 
 .features-section {

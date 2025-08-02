@@ -83,15 +83,15 @@ body {
 }
 
 .bg-blue-600 {
-  background-color: #2563eb;
+  background-color: #f0c180;
 }
 
 .bg-blue-700 {
-  background-color: #1d4ed8;
+  background-color: #6e4d05;
 }
 
 .text-blue-600 {
-  color: #2563eb;
+  color: #cf7d20;
 }
 
 .text-white {
@@ -135,11 +135,11 @@ body {
 }
 
 .hover\:bg-blue-700:hover {
-  background-color: #1d4ed8;
+  background-color: #ca650d;
 }
 
 .hover\:text-blue-600:hover {
-  color: #2563eb;
+  color: #e48f0f;
 }
 
 .text-sm {
