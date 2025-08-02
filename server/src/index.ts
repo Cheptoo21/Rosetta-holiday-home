@@ -1,5 +1,5 @@
 // src/index.ts
-import express from "express";
+/*import express from "express";
 import cors from "cors";
 import dotenv from "dotenv";
 import { PrismaClient } from "@prisma/client";
@@ -31,7 +31,7 @@ const PORT = process.env.PORT || 5000;
     credentials: true,
   })
 );*/
-app.use(
+/*a;pp.use(
   cors({
     origin: [
       "http://localhost:3000", // For local development
@@ -98,4 +98,4 @@ app.listen(PORT, () => {
   console.log(`📊 Environment: ${process.env.NODE_ENV || "development"}`);
   console.log(`🔗 Visit: http://localhost:${PORT}`);
   console.log(`🔗 Health check: http://localhost:${PORT}/api/health`);
-});
+});*/
