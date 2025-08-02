@@ -29,8 +29,8 @@ try {
 
 // Load your main application
 try {
-  console.log("Loading application from src/index.ts...");
-  require("./src/index.ts");
+  console.log("Loading application from server/src/index.ts...");
+  require("./server/src/index.ts");
   console.log("✅ Application started successfully");
 } catch (error) {
   console.error("❌ Failed to start application:", error.message);
